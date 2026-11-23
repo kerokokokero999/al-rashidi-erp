@@ -1,0 +1,518 @@
+{
+  "Invoice": [
+    {
+      "id": "77f17672-0a3d-4c60-b921-612067d925cc",
+      "items": [
+        {
+          "id": "47e63b99-2d48-4f53-b9e2-5a5a5752988c",
+          "name": "بطاطس",
+          "unit": "قطعة",
+          "stock": 50,
+          "barcode": "457835783",
+          "category": "خضار",
+          "minStock": 5,
+          "quantity": 2,
+          "supplier": "مختار",
+          "costPrice": 15,
+          "createdAt": "2026-11-05T10:58:34.102Z",
+          "sellPrice": 20,
+          "updatedAt": "2026-11-05T11:22:45.777Z",
+          "expiryDate": "2026-10-09T00:00:00.000Z"
+        }
+      ],
+      "total": 40,
+      "createdAt": "2026-11-05T09:32:52.267Z",
+      "subTotal": 0,
+      "discount": 0,
+      "tax": 0,
+      "paymentMethod": "CASH",
+      "customerId": null,
+      "shiftId": null
+    },
+    {
+      "id": "2d63e505-0aeb-4d13-9126-b62b9d12ce97",
+      "items": [
+        {
+          "id": "47e63b99-2d48-4f53-b9e2-5a5a5752988c",
+          "name": "بطاطس",
+          "unit": "قطعة",
+          "stock": 48,
+          "barcode": "457835783",
+          "category": "خضار",
+          "minStock": 5,
+          "quantity": 1,
+          "supplier": "مختار",
+          "costPrice": 15,
+          "createdAt": "2026-11-05T10:58:34.102Z",
+          "sellPrice": 20,
+          "updatedAt": "2026-11-05T11:32:52.826Z",
+          "expiryDate": "2026-10-09T00:00:00.000Z"
+        }
+      ],
+      "total": 20,
+      "createdAt": "2026-11-05T09:35:22.159Z",
+      "subTotal": 0,
+      "discount": 0,
+      "tax": 0,
+      "paymentMethod": "CASH",
+      "customerId": null,
+      "shiftId": null
+    },
+    {
+      "id": "7c0ba181-45c2-44fe-972e-ad7fa7169604",
+      "items": [
+        {
+          "id": "47e63b99-2d48-4f53-b9e2-5a5a5752988c",
+          "name": "بطاطس",
+          "unit": "قطعة",
+          "stock": 47,
+          "barcode": "457835783",
+          "category": "خضار",
+          "minStock": 5,
+          "quantity": 1,
+          "supplier": "مختار",
+          "costPrice": 15,
+          "createdAt": "2026-11-05T10:58:34.102Z",
+          "sellPrice": 20,
+          "updatedAt": "2026-11-05T11:35:22.722Z",
+          "expiryDate": "2026-10-09T00:00:00.000Z"
+        }
+      ],
+      "total": 16.5,
+      "createdAt": "2026-11-05T11:02:21.579Z",
+      "subTotal": 20,
+      "discount": 5,
+      "tax": 1.5,
+      "paymentMethod": "CASH",
+      "customerId": null,
+      "shiftId": null
+    },
+    {
+      "id": "7d4df90c-a060-4f60-a963-dc845e652c05",
+      "items": [
+        {
+          "id": "47e63b99-2d48-4f53-b9e2-5a5a5752988c",
+          "name": "بطاطس",
+          "unit": "قطعة",
+          "stock": 46,
+          "barcode": "457835783",
+          "category": "خضار",
+          "minStock": 5,
+          "quantity": 6,
+          "supplier": "مختار",
+          "costPrice": 15,
+          "createdAt": "2026-11-05T10:58:34.102Z",
+          "sellPrice": 20,
+          "updatedAt": "2026-11-05T13:02:22.290Z",
+          "expiryDate": "2026-10-09T00:00:00.000Z"
+        }
+      ],
+      "total": 136.8,
+      "createdAt": "2026-11-05T11:16:08.042Z",
+      "subTotal": 120,
+      "discount": 0,
+      "tax": 16.8,
+      "paymentMethod": "CASH",
+      "customerId": null,
+      "shiftId": null
+    },
+    {
+      "id": "658581a1-5342-466d-9190-472d5e1d8323",
+      "items": [
+        {
+          "id": "47e63b99-2d48-4f53-b9e2-5a5a5752988c",
+          "name": "بطاطس",
+          "unit": "قطعة",
+          "stock": 40,
+          "barcode": "457835783",
+          "category": "خضار",
+          "minStock": 5,
+          "quantity": 5,
+          "supplier": "مختار",
+          "costPrice": 15,
+          "createdAt": "2026-11-05T10:58:34.102Z",
+          "sellPrice": 20,
+          "updatedAt": "2026-11-05T13:16:08.520Z",
+          "expiryDate": "2026-10-09T00:00:00.000Z"
+        }
+      ],
+      "total": 114,
+      "createdAt": "2026-11-05T11:17:45.829Z",
+      "subTotal": 100,
+      "discount": 0,
+      "tax": 14,
+      "paymentMethod": "CASH",
+      "customerId": "0857a92e-29f5-4803-83f4-135085501dcc",
+      "shiftId": null
+    },
+    {
+      "id": "7d03c2f4-b275-4ba0-be37-e00044ad901f",
+      "items": [
+        {
+          "id": "47e63b99-2d48-4f53-b9e2-5a5a5752988c",
+          "name": "بطاطس",
+          "unit": "قطعة",
+          "stock": 35,
+          "barcode": "457835783",
+          "category": "خضار",
+          "minStock": 5,
+          "quantity": 1,
+          "supplier": "مختار",
+          "costPrice": 15,
+          "createdAt": "2026-11-05T10:58:34.102Z",
+          "sellPrice": 20,
+          "updatedAt": "2026-11-05T13:17:46.355Z",
+          "expiryDate": "2026-10-09T00:00:00.000Z"
+        }
+      ],
+      "total": 22.8,
+      "createdAt": "2026-11-05T11:48:08.954Z",
+      "subTotal": 20,
+      "discount": 0,
+      "tax": 2.8,
+      "paymentMethod": "CASH",
+      "customerId": null,
+      "shiftId": null
+    },
+    {
+      "id": "67fc6e28-b355-4ea4-86a3-dbaf381d8764",
+      "items": [
+        {
+          "id": "47e63b99-2d48-4f53-b9e2-5a5a5752988c",
+          "name": "بطاطس",
+          "unit": "قطعة",
+          "stock": 34,
+          "barcode": "457835783",
+          "category": "خضار",
+          "minStock": 5,
+          "quantity": 5,
+          "supplier": "مختار",
+          "costPrice": 15,
+          "createdAt": "2026-11-05T10:58:34.102Z",
+          "sellPrice": 20,
+          "updatedAt": "2026-11-05T13:48:09.383Z",
+          "expiryDate": "2026-10-09T00:00:00.000Z"
+        }
+      ],
+      "total": 100,
+      "createdAt": "2026-11-06T07:15:57.425Z",
+      "subTotal": 100,
+      "discount": 0,
+      "tax": 0,
+      "paymentMethod": "CASH",
+      "customerId": null,
+      "shiftId": null
+    },
+    {
+      "id": "0083c654-f7cc-4a65-84dd-e753014cc21d",
+      "items": [
+        {
+          "id": "47e63b99-2d48-4f53-b9e2-5a5a5752988c",
+          "name": "بطاطس",
+          "unit": "قطعة",
+          "stock": 36,
+          "barcode": "457835783",
+          "category": "خضار",
+          "minStock": 5,
+          "quantity": 8,
+          "supplier": "مختار",
+          "costPrice": 15,
+          "createdAt": "2026-11-05T10:58:34.102Z",
+          "sellPrice": 20,
+          "updatedAt": "2026-11-06T09:46:49.052Z",
+          "expiryDate": "2026-10-09T00:00:00.000Z"
+        }
+      ],
+      "total": 157.5,
+      "createdAt": "2026-11-06T08:11:57.534Z",
+      "subTotal": 160,
+      "discount": 10,
+      "tax": 7.5,
+      "paymentMethod": "CASH",
+      "customerId": null,
+      "shiftId": "3b9de8d0-e399-46b4-b1a1-ef7712753d79"
+    },
+    {
+      "id": "de976e39-a5fa-4c55-bb2f-11c8a9b086c5",
+      "items": [
+        {
+          "id": "47e63b99-2d48-4f53-b9e2-5a5a5752988c",
+          "name": "بطاطس",
+          "unit": "قطعة",
+          "stock": 28,
+          "barcode": "457835783",
+          "category": "خضار",
+          "minStock": 5,
+          "quantity": 6,
+          "supplier": "مختار",
+          "costPrice": 15,
+          "createdAt": "2026-11-05T10:58:34.102Z",
+          "sellPrice": 20,
+          "updatedAt": "2026-11-06T10:11:58.001Z",
+          "expiryDate": "2026-10-09T00:00:00.000Z"
+        }
+      ],
+      "total": 123.9,
+      "createdAt": "2026-11-06T08:45:06.564Z",
+      "subTotal": 120,
+      "discount": 2,
+      "tax": 5.9,
+      "paymentMethod": "CASH",
+      "customerId": null,
+      "shiftId": "3b9de8d0-e399-46b4-b1a1-ef7712753d79"
+    }
+  ],
+  "Product": [
+    {
+      "id": "47e63b99-2d48-4f53-b9e2-5a5a5752988c",
+      "name": "بطاطس",
+      "barcode": "457835783",
+      "category": "خضار",
+      "costPrice": 15,
+      "sellPrice": 20,
+      "stock": 26,
+      "createdAt": "2026-11-05T08:58:34.102Z",
+      "updatedAt": "2026-11-06T10:51:52.396Z",
+      "unit": "قطعة",
+      "minStock": 5,
+      "supplier": "مختار",
+      "expiryDate": "2026-10-08T21:00:00.000Z",
+      "image": "https://res.cloudinary.com/suyq8xpk/image/upload/v1793969509/al-rashidi-products/yn2rpw3kzphkjmwzg6w0.png"
+    }
+  ],
+  "Customer": [
+    {
+      "id": "0857a92e-29f5-4803-83f4-135085501dcc",
+      "name": "ز",
+      "phone": "342432",
+      "email": null,
+      "createdAt": "2026-11-05T11:15:28.456Z"
+    }
+  ],
+  "VerificationToken": [],
+  "Account": [],
+  "Session": [],
+  "User": [
+    {
+      "id": "cmw3hryr800009l6cuekh2uqu",
+      "name": "مدير النظام",
+      "email": "admin@alrashidi.com",
+      "emailVerified": null,
+      "image": null,
+      "password": "$2b$10$jrm3tYvWcVE98BlphHVxauauk3utR2MSatNOwrW.m53r3/e80.byG",
+      "role": "ADMIN",
+      "permissions": "[\"/admin/dashboard\",\"/pos\",\"/products\",\"/suppliers\",\"/purchases\",\"/invoices\",\"/customers\",\"/expenses\",\"/employees\",\"/reports\",\"/settings\"]"
+    },
+    {
+      "id": "cmw3mwcgz00019lp0cngzrc5g",
+      "name": "كاشير تجريبي",
+      "email": "cashier@alrashidi.com",
+      "emailVerified": null,
+      "image": null,
+      "password": "$2b$10$uFBByKeasXlYx88n4oV4me5.hfi8dSZ7Ct4lWrBe7wBcjE4mjKl62",
+      "role": "CASHIER",
+      "permissions": "[\"/pos\"]"
+    }
+  ],
+  "Supplier": [
+    {
+      "id": "e71b880e-a58f-4e9e-a7c8-b5498f322247",
+      "name": "مختار",
+      "phone": "546456",
+      "email": null,
+      "createdAt": "2026-11-06T07:37:49.737Z"
+    }
+  ],
+  "Purchase": [
+    {
+      "id": "7b8fac9c-63dd-48b7-aced-0d0315568254",
+      "items": [
+        {
+          "id": "47e63b99-2d48-4f53-b9e2-5a5a5752988c",
+          "name": "بطاطس",
+          "unit": "قطعة",
+          "stock": 29,
+          "barcode": "457835783",
+          "category": "خضار",
+          "minStock": 5,
+          "quantity": 5,
+          "supplier": "مختار",
+          "costPrice": 15,
+          "createdAt": "2026-11-05T10:58:34.102Z",
+          "sellPrice": 20,
+          "updatedAt": "2026-11-06T09:15:57.896Z",
+          "expiryDate": "2026-10-09T00:00:00.000Z"
+        }
+      ],
+      "total": 75,
+      "supplier": null,
+      "createdAt": "2026-11-06T07:38:01.612Z",
+      "status": "RECEIVED",
+      "supplierId": "e71b880e-a58f-4e9e-a7c8-b5498f322247"
+    },
+    {
+      "id": "7b3a8885-efeb-4965-92b2-c5a28d55c184",
+      "items": [
+        {
+          "id": "47e63b99-2d48-4f53-b9e2-5a5a5752988c",
+          "name": "بطاطس",
+          "unit": "قطعة",
+          "stock": 22,
+          "barcode": "457835783",
+          "category": "خضار",
+          "minStock": 5,
+          "quantity": 4,
+          "supplier": "مختار",
+          "costPrice": 15,
+          "createdAt": "2026-11-05T10:58:34.102Z",
+          "sellPrice": 20,
+          "updatedAt": "2026-11-06T10:45:07.039Z",
+          "expiryDate": "2026-10-09T00:00:00.000Z"
+        }
+      ],
+      "total": 60,
+      "supplier": null,
+      "createdAt": "2026-11-06T08:47:04.996Z",
+      "status": "RECEIVED",
+      "supplierId": "e71b880e-a58f-4e9e-a7c8-b5498f322247"
+    }
+  ],
+  "Shift": [
+    {
+      "id": "7fc9806d-ddfb-4084-80ff-9269f666be96",
+      "cashierId": "cmw3mwcgz00019lp0cngzrc5g",
+      "cashierName": "كاشير تجريبي",
+      "startTime": "2026-11-06T07:15:33.752Z",
+      "endTime": null,
+      "startingCash": 500,
+      "expectedCash": 0,
+      "actualCash": null,
+      "difference": null,
+      "status": "OPEN"
+    },
+    {
+      "id": "3b9de8d0-e399-46b4-b1a1-ef7712753d79",
+      "cashierId": "cmw3hryr800009l6cuekh2uqu",
+      "cashierName": "مدير النظام",
+      "startTime": "2026-11-06T08:11:34.541Z",
+      "endTime": null,
+      "startingCash": 1000,
+      "expectedCash": 0,
+      "actualCash": null,
+      "difference": null,
+      "status": "OPEN"
+    }
+  ],
+  "Expense": [
+    {
+      "id": "fd497784-aa3c-416e-89c8-5495247aceb3",
+      "title": "فاتورة 1",
+      "amount": 150,
+      "shiftId": null,
+      "createdAt": "2026-11-06T07:17:23.053Z"
+    }
+  ],
+  "Return": [
+    {
+      "id": "77dcca04-5072-4e86-84d9-18d1c9c7edad",
+      "invoiceId": "67fc6e28-b355-4ea4-86a3-dbaf381d8764",
+      "items": [
+        {
+          "id": "47e63b99-2d48-4f53-b9e2-5a5a5752988c",
+          "name": "بطاطس",
+          "unit": "قطعة",
+          "stock": 34,
+          "barcode": "457835783",
+          "category": "خضار",
+          "minStock": 5,
+          "quantity": 2,
+          "supplier": "مختار",
+          "costPrice": 15,
+          "createdAt": "2026-11-05T10:58:34.102Z",
+          "returnQty": 0,
+          "sellPrice": 20,
+          "updatedAt": "2026-11-05T13:48:09.383Z",
+          "expiryDate": "2026-10-09T00:00:00.000Z"
+        }
+      ],
+      "total": 40,
+      "reason": "",
+      "shiftId": null,
+      "createdAt": "2026-11-06T07:46:48.572Z"
+    }
+  ],
+  "Settings": [
+    {
+      "id": "global",
+      "storeName": "Salesaty",
+      "phone": "01000000000",
+      "whatsapp": "201000000000",
+      "address": "العنوان هنا",
+      "taxNumber": "123456789",
+      "currency": "ج.م",
+      "defaultTaxRate": 0,
+      "defaultDiscount": 0,
+      "autoPrintInvoice": true,
+      "enableBarcode": true,
+      "invoicePrefix": "RSH-",
+      "updatedAt": "2026-11-06T08:11:20.361Z"
+    }
+  ],
+  "Employee": [
+    {
+      "id": "3c4041b5-2394-4290-895c-839bad5a059c",
+      "name": "علي",
+      "phone": "3213123",
+      "email": null,
+      "position": "كاشير",
+      "salary": 1500,
+      "hireDate": "2026-11-06T09:26:44.832Z",
+      "isActive": true,
+      "createdAt": "2026-11-06T09:26:44.832Z"
+    }
+  ],
+  "Order": [
+    {
+      "id": "0a08f352-97a9-4f60-bfba-cbf2173fea52",
+      "customerName": "j",
+      "customerPhone": "5345345",
+      "customerAddress": "dfgdfgfdg",
+      "items": [
+        {
+          "id": "47e63b99-2d48-4f53-b9e2-5a5a5752988c",
+          "name": "بطاطس",
+          "image": "https://res.cloudinary.com/suyq8xpk/image/upload/v1793969509/al-rashidi-products/yn2rpw3kzphkjmwzg6w0.png",
+          "stock": 26,
+          "category": "خضار",
+          "quantity": 1,
+          "sellPrice": 20
+        }
+      ],
+      "total": 20,
+      "status": "PREPARING",
+      "notes": null,
+      "createdAt": "2026-11-06T10:52:33.886Z"
+    },
+    {
+      "id": "3b861a0a-9637-4321-9dbe-bcaf5fd07997",
+      "customerName": "ل",
+      "customerPhone": "435435345",
+      "customerAddress": "فقثفقصف",
+      "items": [
+        {
+          "id": "47e63b99-2d48-4f53-b9e2-5a5a5752988c",
+          "name": "بطاطس",
+          "image": "https://res.cloudinary.com/suyq8xpk/image/upload/v1793969509/al-rashidi-products/yn2rpw3kzphkjmwzg6w0.png",
+          "stock": 26,
+          "category": "خضار",
+          "quantity": 5,
+          "sellPrice": 20
+        }
+      ],
+      "total": 100,
+      "status": "PREPARING",
+      "notes": null,
+      "createdAt": "2026-11-06T10:56:21.774Z"
+    }
+  ]
+}

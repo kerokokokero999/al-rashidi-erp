@@ -1,0 +1,107 @@
+{
+  "name": "salesaty",
+  "version": "0.1.0",
+  "private": true,
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "postinstall": "prisma generate",
+    "obfuscate": "javascript-obfuscator .next/static/chunks --output .next/static/chunks-obfuscated --compact true --control-flow-flattening true --dead-code-injection true --string-array true --string-array-encoding base64",
+    "electron": "electron electron/main.js",
+    "electron:build": "npm run build && electron-builder",
+    "electron:build:win": "npm run build && electron-builder --win"
+  },
+  "dependencies": {
+    "@auth/prisma-adapter": "^2.11.3",
+    "@prisma/client": "^6.2.1",
+    "@supabase/supabase-js": "^2.119.0",
+    "bcryptjs": "^3.0.3",
+    "framer-motion": "^14.9.1",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.2.1",
+    "lucide-react": "^1.69.0",
+    "next": "16.4.5",
+    "next-auth": "^4.24.15",
+    "node-cron": "^4.6.0",
+    "node-machine-id": "^1.1.12",
+    "pg": "^8.23.1",
+    "qrcode.react": "^4.2.0",
+    "react": "19.3.0",
+    "react-barcode": "^1.6.1",
+    "react-dom": "19.3.0",
+    "react-hot-toast": "^2.6.1",
+    "recharts": "^3.10.1",
+    "sweetalert2": "^11.26.25",
+    "xlsx": "^0.18.5",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "^4",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^20",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "electron": "^45.2.3",
+    "electron-builder": "^26.18.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.5",
+    "javascript-obfuscator": "^5.10.0",
+    "prisma": "^6.2.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  },
+  "build": {
+    "appId": "com.alrashidi.erp",
+    "productName": "Salesaty",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "electron/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Salesaty",
+      "language": "1025"
+    },
+    "files": [
+      "electron/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": ".next/standalone",
+        "to": "app",
+        "filter": [
+          "**/*",
+          "!node_modules/**",
+          "!public/**"
+        ]
+      },
+      {
+        "from": ".next/standalone/node_modules",
+        "to": "app/node_modules"
+      },
+      {
+        "from": ".next/static",
+        "to": "app/.next/static"
+      },
+      {
+        "from": "public",
+        "to": "app/public"
+      },
+      {
+        "from": "prisma",
+        "to": "app/prisma"
+      }
+    ]
+  }
+}

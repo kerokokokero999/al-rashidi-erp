@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Settings" ADD COLUMN "phone2" TEXT DEFAULT '01000000000';

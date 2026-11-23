@@ -1,0 +1,553 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id            Int                  @id @default(autoincrement())
+  name          String
+  barcode       String?              @unique
+  categoryId    Int?
+  unitId        Int?
+  costPrice     Float
+  sellPrice     Float
+  stock         Int                  @default(0)
+  minStock      Int                  @default(5)
+  supplier      String?
+  expiryDate    DateTime?
+  image         String?
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+  auditItems    InventoryAuditItem[]
+  invoiceItems  InvoiceItem[]
+  unit          Unit?                @relation(fields: [unitId], references: [id])
+  category      Category?            @relation(fields: [categoryId], references: [id])
+  productStocks ProductStock[]
+  productUnits  ProductUnit[]
+  transfers      WarehouseTransfer[]
+  damages        DamagedProduct[]
+  purchaseItems  PurchaseItem[] 
+  employeeWithdrawals EmployeeWithdrawal[]
+}
+
+model Invoice {
+  id            Int           @id @default(autoincrement())
+  subTotal      Float
+  discount      Float         @default(0)
+  tax           Float         @default(0)
+  total         Float
+  paymentMethod String        @default("CASH")   // CASH | CREDIT
+  paidAmount    Float         @default(0)         // 👈 جديد
+  dueDate       DateTime?                         // 👈 جديد
+  warehouseId   Int?                              // 👈 جديد
+  customerId    Int?
+  createdAt     DateTime      @default(now())
+  branchId      Int?
+  branch        Branch?       @relation(fields: [branchId], references: [id])
+  customer      Customer?     @relation(fields: [customerId], references: [id])
+  warehouse     Warehouse?    @relation(fields: [warehouseId], references: [id])  // 👈 جديد
+  items         InvoiceItem[]
+  returns       Return[]      
+  payments Payment[]
+}
+
+model InvoiceItem {
+  id        Int      @id @default(autoincrement())
+  invoiceId Int
+  productId Int?
+  name      String
+  quantity  Int
+  sellPrice Float
+   unitId    Int?  
+  unitName  String? 
+  factor    Float    @default(1) 
+  product   Product? @relation(fields: [productId], references: [id])
+  invoice   Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+}
+
+model Customer {
+  id        Int       @id @default(autoincrement())
+  name      String
+  phone     String    @unique
+  email     String?
+  createdAt DateTime  @default(now())
+  invoices  Invoice[]
+  payments Payment[]
+}
+
+model Supplier {
+  id        Int        @id @default(autoincrement())
+  name      String
+  phone     String     @unique
+  email     String?
+  createdAt DateTime   @default(now())
+  purchases Purchase[]
+  payments Payment[]
+}
+
+model Purchase {
+  id             Int            @id @default(autoincrement())
+  total          Float
+  status         String         @default("PENDING") // PENDING | RECEIVED | CANCELLED
+  paymentMethod  String         @default("CASH")    // CASH | CREDIT
+  paidAmount     Float          @default(0)         // المبلغ المدفوع
+  dueDate        DateTime?                          // تاريخ الاستحقاق (لو آجل)
+  supplierId     Int?
+  branchId       Int?                               // الفرع (لو محتاج)
+  createdAt      DateTime       @default(now())
+  supplier       Supplier?      @relation(fields: [supplierId], references: [id])
+  purchaseItems  PurchaseItem[]
+  returns Return[]
+  payments Payment[]
+}
+
+model Expense {
+  id        Int      @id @default(autoincrement())
+  title     String
+  amount    Float
+  createdAt DateTime @default(now())
+  branchId  Int?
+  branch    Branch?  @relation(fields: [branchId], references: [id])
+}
+
+model Return {
+  id        Int      @id @default(autoincrement())
+  invoiceId Int?                                    // 👈 بقى optional (مرتجع المشتريات بيرتبط بـ Purchase مش Invoice)
+  purchaseId Int?                                   // 👈 جديد
+  type      String   @default("SALE")              // 👈 SALE | PURCHASE
+  items     String
+  total     Float
+  reason    String?
+  createdAt DateTime @default(now())
+  
+  invoice   Invoice?  @relation(fields: [invoiceId], references: [id])
+  purchase  Purchase? @relation(fields: [purchaseId], references: [id])
+}
+
+model Settings {
+  id               String   @id @default("global")
+  storeName        String   @default("Salesaty")
+  phone            String   @default("01000000000")
+  phone2           String?  @default("01000000000")           
+  whatsapp         String   @default("201000000000")
+  address          String   @default("العنوان هنا")
+  taxNumber        String   @default("123456789")
+  currency         String   @default("ج.م")
+  defaultTaxRate   Float    @default(14)
+  defaultDiscount  Float    @default(0)
+  autoPrintInvoice Boolean  @default(true)
+  enableBarcode    Boolean  @default(true)
+  invoicePrefix    String   @default("INV-")
+  logo             String?  
+  footerText       String?  // نص أسفل الفاتورة (مثلاً "شكراً لزيارتكم")
+  autoBackupEnabled    Boolean  @default(false)     // 👈 جديد
+  autoBackupFrequency  String   @default("DAILY")   // 👈 DAILY | WEEKLY
+  lastBackupAt         DateTime?                    
+  
+  updatedAt        DateTime @updatedAt
+}
+
+model Employee {
+  id          Int          @id @default(autoincrement())
+  name        String
+  phone       String       @unique
+  email       String?
+  position    String
+  salary      Float
+  hireDate    DateTime     @default(now())
+  isActive    Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  attendances Attendance[]
+  withdrawals EmployeeWithdrawal[]
+advances    Advance[]
+salaries    SalaryPayment[]
+}
+
+model Order {
+  id              Int      @id @default(autoincrement())
+  customerName    String
+  customerPhone   String
+  customerAddress String
+  items           String
+  total           Float
+  status          String   @default("PENDING")
+  notes           String?
+  createdAt       DateTime @default(now())
+  onlineOrderId   Int?     @unique
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  role          String    @default("CASHIER")
+  permissions   String?
+  branchId      Int?
+  accounts      Account[]
+  sessions      Session[]
+  branch        Branch?   @relation(fields: [branchId], references: [id])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  title     String
+  message   String
+  type      String
+  isRead    Boolean  @default(false)
+  link      String?
+  createdAt DateTime @default(now())
+}
+
+model Category {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  createdAt DateTime  @default(now())
+  products  Product[]
+}
+
+model Unit {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  createdAt DateTime  @default(now())
+  products  Product[]
+}
+
+model InventoryAudit {
+  id        Int                  @id @default(autoincrement())
+  name      String
+  status    String               @default("OPEN")
+  createdAt DateTime             @default(now())
+  closedAt  DateTime?
+  items     InventoryAuditItem[]
+}
+
+model InventoryAuditItem {
+  id          Int            @id @default(autoincrement())
+  auditId     Int
+  productId   Int
+  expectedQty Int
+  actualQty   Int
+  difference  Int
+  product     Product        @relation(fields: [productId], references: [id])
+  audit       InventoryAudit @relation(fields: [auditId], references: [id], onDelete: Cascade)
+}
+
+model Attendance {
+  id         Int       @id @default(autoincrement())
+  employeeId Int
+  checkIn    DateTime  @default(now())
+  checkOut   DateTime?
+  date       DateTime  @default(now())
+  employee   Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+}
+
+model Branch {
+  id            Int            @id @default(autoincrement())
+  name          String         @unique
+  address       String?
+  phone         String?
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  expenses      Expense[]
+  invoices      Invoice[]
+  users         User[]
+  warehouses    Warehouse[]
+  cashboxes    Cashbox[]
+  bankAccounts BankAccount[]
+}
+
+model ProductStock {
+  id          Int       @id @default(autoincrement())
+  productId   Int
+  warehouseId Int
+  stock       Float     @default(0)
+  purchasePrice Float   @default(0)  // سعر الشراء في المخزن ده
+  product     Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  warehouse   Warehouse @relation(fields: [warehouseId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, warehouseId])
+}
+
+model ProductUnit {
+  id        Int      @id @default(autoincrement())
+  productId Int
+  name      String   // اسم الوحدة (علبة / كرتونة / قطعة)
+  factor    Float    @default(1)  // معامل التحويل للوحدة الأساسية
+  price     Float    // سعر البيع للوحدة دي
+  barcode   String?  @unique      // باركود خاص بالوحدة (اختياري)
+  isBase    Boolean  @default(false) // هل دي الوحدة الأساسية؟
+  createdAt DateTime @default(now())
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+// ===== المخازن =====
+model Warehouse {
+  id            Int            @id @default(autoincrement())
+  name          String
+  branchId      Int
+  branch        Branch         @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  isActive      Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+
+  productStocks ProductStock[]
+  transfersFrom WarehouseTransfer[] @relation("FromWarehouse")
+  transfersTo   WarehouseTransfer[] @relation("ToWarehouse")
+  damages       DamagedProduct[]
+  purchaseItems PurchaseItem[]
+  invoices Invoice[]
+  employeeWithdrawals EmployeeWithdrawal[]
+
+  @@unique([name, branchId])
+}
+
+// ===== تحويلات المخازن =====
+model WarehouseTransfer {
+  id              Int       @id @default(autoincrement())
+  fromWarehouseId Int
+  toWarehouseId   Int
+  productId       Int
+  quantity        Float
+  unitId          Int?
+  unitName        String?
+  factor          Float     @default(1)
+  purchasePrice   Float     @default(0)
+  sellPrice       Float     @default(0)
+  transferDate    DateTime  @default(now())
+  responsible     String?
+  reason          String?
+  createdAt       DateTime  @default(now())
+
+  fromWarehouse   Warehouse @relation("FromWarehouse", fields: [fromWarehouseId], references: [id])
+  toWarehouse     Warehouse @relation("ToWarehouse", fields: [toWarehouseId], references: [id])
+  product         Product   @relation(fields: [productId], references: [id])
+}
+
+// ===== المنتجات التالفة =====
+model DamagedProduct {
+  id           Int       @id @default(autoincrement())
+  warehouseId  Int
+  productId    Int
+  quantity     Float
+  unitId       Int?
+  unitName     String?
+  factor       Float     @default(1)
+  reason       String?
+  responsible  String?
+  damageDate   DateTime  @default(now())
+  createdAt    DateTime  @default(now())
+
+  warehouse    Warehouse @relation(fields: [warehouseId], references: [id])
+  product      Product   @relation(fields: [productId], references: [id])
+}
+// ===== أصناف فواتير المشتريات (مبدئي — هنعدّله في مرحلة المشتريات) =====
+model PurchaseItem {
+  id          Int      @id @default(autoincrement())
+  purchaseId  Int
+  productId   Int
+  warehouseId Int
+  name        String
+  quantity    Float
+  unitId      Int?
+  unitName    String?
+  factor      Float    @default(1)
+  costPrice   Float
+  tax         Float    @default(0)
+  discount    Float    @default(0)
+  total       Float
+
+  purchase    Purchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+  product     Product  @relation(fields: [productId], references: [id])
+  warehouse   Warehouse @relation(fields: [warehouseId], references: [id])
+}
+
+model Payment {
+  id           Int       @id @default(autoincrement())
+  type         String    // SUPPLIER | CUSTOMER
+  supplierId   Int?      // لو type=SUPPLIER
+  customerId   Int?      // لو type=CUSTOMER
+  purchaseId   Int?      // لو سداد فاتورة مشتريات
+  invoiceId    Int?      // لو سداد فاتورة مبيعات
+  amount       Float
+  paymentMethod String   @default("CASH")
+  notes        String?
+  createdAt    DateTime  @default(now())
+
+  supplier     Supplier? @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+  customer     Customer? @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  purchase     Purchase? @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+  invoice      Invoice?  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+}
+
+// ===== الخزنة =====
+model Cashbox {
+  id            Int      @id @default(autoincrement())
+  name          String
+  balance       Float    @default(0)
+  branchId      Int?
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+
+  branch        Branch?  @relation(fields: [branchId], references: [id])
+  transactions  TreasuryTransaction[]
+  vouchers Voucher[]
+}
+
+// ===== البنك =====
+model BankAccount {
+  id            Int      @id @default(autoincrement())
+  name          String
+  bankName      String?
+  accountNumber String?
+  balance       Float    @default(0)
+  branchId      Int?
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+
+  branch        Branch?  @relation(fields: [branchId], references: [id])
+  transactions  TreasuryTransaction[]
+  vouchers Voucher[]
+}
+
+// ===== حركات الخزنة والبنك =====
+model TreasuryTransaction {
+  id             Int      @id @default(autoincrement())
+  type           String   // DEPOSIT | WITHDRAW | TRANSFER
+  sourceType     String   // CASHBOX | BANK
+  sourceId       Int?     // cashboxId أو bankAccountId
+  destType       String?  // CASHBOX | BANK (للتحويل)
+  destId         Int?     // cashboxId أو bankAccountId (للتحويل)
+  amount         Float
+  reason         String?
+  responsible    String?
+  referenceType  String?  // SALE | PURCHASE | VOUCHER | SALARY | RETURN | MANUAL
+  referenceId    Int?
+  createdAt      DateTime @default(now())
+
+  cashbox        Cashbox?     @relation(fields: [sourceId], references: [id])
+  bankAccount    BankAccount? @relation(fields: [sourceId], references: [id])
+}
+
+// ===== السندات (قبض/صرف) =====
+model Voucher {
+  id            Int       @id @default(autoincrement())
+  voucherNumber Int       @unique
+  type          String
+  amount        Float
+  partyName     String
+  reason        String?
+  responsible   String?
+  cashboxId     Int?     
+  bankAccountId Int?    
+  createdAt     DateTime  @default(now())
+
+  cashbox       Cashbox?     @relation(fields: [cashboxId], references: [id])
+  bankAccount   BankAccount? @relation(fields: [bankAccountId], references: [id])
+}
+
+// ===== مسحوبات الموظفين (منتجات) =====
+model EmployeeWithdrawal {
+  id          Int      @id @default(autoincrement())
+  employeeId  Int
+  productId   Int
+  warehouseId Int?
+  quantity    Float
+  unitId      Int?
+  unitName    String?
+  factor      Float    @default(1)
+  price       Float
+  total       Float
+  withdrawalDate DateTime @default(now())
+  notes       String?
+  createdAt   DateTime @default(now())
+
+  employee    Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  product     Product   @relation(fields: [productId], references: [id])
+  warehouse   Warehouse? @relation(fields: [warehouseId], references: [id])
+}
+
+// ===== السلفيات (موظف أو شخص عادي) =====
+model Advance {
+  id            Int      @id @default(autoincrement())
+  personType    String   // EMPLOYEE | PERSON
+  employeeId    Int?
+  personName    String?  // لو personType = PERSON
+  amount        Float
+  advanceDate   DateTime @default(now())
+  dueDate       DateTime?
+  paidAmount    Float    @default(0)
+  notes         String?
+  createdAt     DateTime @default(now())
+
+  employee      Employee? @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+}
+
+// ===== صرف المرتبات =====
+model SalaryPayment {
+  id            Int      @id @default(autoincrement())
+  employeeId    Int
+  salary        Float    // الراتب الشهري
+  advancesDeducted Float @default(0)  // خصم السلف
+  withdrawalsDeducted Float @default(0)  // خصم المسحوبات
+  netSalary     Float    // صافي الراتب
+  payDate       DateTime @default(now())
+  dueDate       DateTime?
+  notes         String?
+  createdAt     DateTime @default(now())
+
+  employee      Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+}
+
+model AuditLog {
+  id          Int      @id @default(autoincrement())
+  action      String   // CREATE | UPDATE | DELETE | LOGIN | LOGOUT
+  entity      String   // Product | Invoice | Customer | ...
+  entityId    Int?
+  description String?
+  userId      String?
+  userName    String?
+  userEmail   String?
+  ipAddress   String?
+  metadata    String?  // JSON string (تفاصيل إضافية)
+  createdAt   DateTime @default(now())
+}
